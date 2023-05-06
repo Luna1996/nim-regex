@@ -253,3 +253,15 @@ func startsWithImpl*(text: string, regex: Regex, start: int): bool =
     look = initLook()
   result = matchImpl(
     smA, smB, capts, capt, text, regex.nfa, look, start, flags)
+
+func eatImpl*(text: string, regex: Regex, start: int): int =
+  var
+    smA = newSubmatches(regex.nfa.s.len)
+    smB = newSubmatches(regex.nfa.s.len)
+    capts: Capts
+    capt = -1'i32
+    look = initLook()
+  if matchImpl(smA, smB, capts, capt, text, regex.nfa, look, start, {mfAnchored, mfNoCaptures}):
+    smA[0].bounds.len
+  else:
+    -1

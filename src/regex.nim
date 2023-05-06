@@ -732,6 +732,9 @@ func startsWith*(
 
   startsWithImpl(s, pattern, start)
 
+func eat*(s: string, pattern: Regex, start = 0): int {.inline, raises: [].} =
+  eatImpl(s, pattern, start)
+
 # XXX use findAll and check last match bounds
 func endsWith*(s: string, pattern: Regex): bool {.inline, raises: [].} =
   ## return whether the string
